@@ -1,0 +1,1507 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>陈春延 | Tanya — 个人网站</title>
+  <meta name="description" content="陈春延（Tanya）个人作品网站 — 文案、视觉设计、影像纪实">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Space+Mono:wght@400;700&family=Cormorant+Garamond:wght@400;700&display=swap" rel="stylesheet">
+  <!-- Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <style>
+    :root {
+      --haze-blue: #6082C0;
+      --milk-white: #F5F4F0;
+      --soft-pink: #FBF3F0;
+      --rice-white: #F6F2EB;
+      --text-primary: #2C2C2C;
+      --text-secondary: #6B6B6B;
+      --text-muted: #9B9B9B;
+      --accent-warm: #D4A574;
+      --dot-color: rgba(96, 130, 192, 0.12);
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html {
+      scroll-behavior: smooth;
+      font-size: 16px;
+    }
+
+    body {
+      font-family: "Noto Serif SC", "Source Han Serif SC", "PingFang SC", "Microsoft YaHei", serif;
+      background-color: var(--milk-white);
+      color: var(--text-primary);
+      overflow-x: hidden;
+      line-height: 1.6;
+    }
+
+    img { max-width: 100%; display: block; }
+
+    /* Utility */
+    .font-en { font-family: "Playfair Display", "Cormorant Garamond", serif; }
+    .font-mono { font-family: "Space Mono", "Courier Prime", monospace; letter-spacing: 0.05em; }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    @media (min-width: 1024px) {
+      .container { padding: 0 40px; }
+    }
+
+    /* Animations */
+    @keyframes float {
+      0%, 100% { transform: translateY(0) rotate(0deg); }
+      50% { transform: translateY(-20px) rotate(3deg); }
+    }
+    @keyframes breathe {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.03); }
+    }
+    @keyframes sway {
+      0%, 100% { transform: rotate(-2deg) translateY(0); }
+      50% { transform: rotate(2deg) translateY(-6px); }
+    }
+    @keyframes wiggle {
+      0%, 100% { transform: rotate(-3deg); }
+      50% { transform: rotate(3deg); }
+    }
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.7; transform: scale(1.1); }
+    }
+
+    .animate-float { animation: float linear infinite; }
+    .animate-breathe { animation: breathe 6s ease-in-out infinite; }
+    .animate-sway { animation: sway 4s ease-in-out infinite; }
+    .animate-wiggle { animation: wiggle 3s ease-in-out infinite; }
+    .animate-fade-up { animation: fadeUp 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards; }
+    .animate-pulse-music { animation: pulse 2s infinite; }
+
+    /* Reveal on scroll */
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Navigation */
+    #navbar {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      height: 64px;
+      z-index: 1000;
+      background: rgba(245, 244, 240, 0.85);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(96, 130, 192, 0.1);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 24px;
+      transition: all 0.3s;
+    }
+
+    .nav-left, .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .nav-btn {
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-family: "Space Mono", monospace;
+      font-size: 13px;
+      color: var(--text-secondary);
+      transition: color 0.3s;
+      letter-spacing: 0.05em;
+    }
+    .nav-btn:hover { color: var(--haze-blue); }
+
+    .nav-links {
+      display: none;
+      gap: 32px;
+      font-size: 14px;
+      letter-spacing: 0.1em;
+    }
+    .nav-links a {
+      text-decoration: none;
+      color: var(--text-secondary);
+      position: relative;
+      transition: color 0.3s;
+      font-family: "Noto Serif SC", serif;
+    }
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: -4px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: var(--haze-blue);
+      transition: width 0.3s;
+    }
+    .nav-links a:hover, .nav-links a.active {
+      color: var(--haze-blue);
+    }
+    .nav-links a.active::after, .nav-links a:hover::after {
+      width: 100%;
+    }
+
+    .hamburger {
+      display: block;
+      background: none;
+      border: none;
+      font-size: 20px;
+      color: var(--text-secondary);
+      cursor: pointer;
+    }
+
+    @media (min-width: 768px) {
+      .nav-links { display: flex; }
+      .hamburger { display: none; }
+    }
+
+    /* Mobile Menu */
+    #mobile-menu {
+      position: fixed;
+      inset: 0;
+      background: rgba(245, 244, 240, 0.97);
+      backdrop-filter: blur(20px);
+      z-index: 999;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 40px;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.4s;
+    }
+    #mobile-menu.open {
+      opacity: 1;
+      pointer-events: all;
+    }
+    #mobile-menu a {
+      font-family: "Noto Serif SC", serif;
+      font-size: 24px;
+      color: var(--text-secondary);
+      text-decoration: none;
+      opacity: 0;
+      transform: translateY(10px);
+      transition: all 0.4s;
+    }
+    #mobile-menu.open a {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    #mobile-menu.open a:nth-child(1) { transition-delay: 0.05s; }
+    #mobile-menu.open a:nth-child(2) { transition-delay: 0.1s; }
+    #mobile-menu.open a:nth-child(3) { transition-delay: 0.15s; }
+    #mobile-menu.open a:nth-child(4) { transition-delay: 0.2s; }
+    #mobile-menu.open a:nth-child(5) { transition-delay: 0.25s; }
+    #mobile-menu .close-btn {
+      position: absolute;
+      top: 20px;
+      right: 24px;
+      background: none;
+      border: none;
+      font-size: 24px;
+      color: var(--text-secondary);
+      cursor: pointer;
+    }
+
+    /* Hero */
+    #hero {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      background: var(--milk-white);
+    }
+
+    .floating-chars {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      z-index: 1;
+    }
+    .floating-chars span {
+      position: absolute;
+      font-family: "Space Mono", monospace;
+      color: var(--haze-blue);
+      opacity: 0.15;
+      font-size: 14px;
+      animation: float linear infinite;
+    }
+
+    .hero-center {
+      position: relative;
+      z-index: 10;
+      text-align: center;
+    }
+
+    .hero-logo-wrap {
+      position: relative;
+      display: inline-block;
+    }
+    .hero-logo-wrap img {
+      width: 260px;
+      height: auto;
+      filter: drop-shadow(0 10px 30px rgba(96,130,192,0.15));
+    }
+    @media (min-width: 768px) {
+      .hero-logo-wrap img { width: 320px; }
+    }
+
+    .hero-greeting {
+      position: absolute;
+      font-family: "Noto Serif SC", serif;
+      font-size: 24px;
+      white-space: nowrap;
+    }
+    .hero-greeting.hi {
+      top: 10px;
+      left: -10px;
+      color: var(--text-primary);
+    }
+    @media (min-width: 768px) {
+      .hero-greeting { font-size: 32px; }
+      .hero-greeting.hi { top: 0; left: -30px; }
+    }
+
+    .hero-name-below {
+      font-family: "Noto Serif SC", serif;
+      font-size: 24px;
+      text-align: right;
+      margin-top: 8px;
+      margin-right: -20px;
+      white-space: nowrap;
+    }
+    .hero-name-below span:first-child { color: var(--text-primary); }
+    .hero-name-below span:last-child { color: var(--haze-blue); }
+    @media (min-width: 768px) {
+      .hero-name-below { font-size: 32px; margin-top: 12px; margin-right: -40px; }
+    }
+
+    .hero-quote {
+      position: absolute;
+      bottom: 60px;
+      left: 24px;
+      z-index: 10;
+      font-family: "Noto Serif SC", serif;
+      font-size: 13px;
+      color: var(--text-muted);
+      line-height: 2;
+    }
+    .hero-quote p:nth-child(1) { margin-left: 0; }
+    .hero-quote p:nth-child(2) { margin-left: 16px; }
+    .hero-quote p:nth-child(3) { margin-left: 32px; }
+    .hero-quote p:nth-child(4) { margin-left: 16px; }
+    .hero-quote p:nth-child(5) { margin-left: 0; }
+
+    @media (min-width: 768px) {
+      .hero-quote { left: 60px; bottom: 80px; }
+    }
+
+    /* Sections */
+    section { padding: 80px 0; }
+    @media (min-width: 768px) { section { padding: 120px 0; } }
+
+    .section-title {
+      font-family: "Noto Serif SC", serif;
+      font-size: 28px;
+      color: var(--text-primary);
+      margin-bottom: 16px;
+      letter-spacing: 0.05em;
+    }
+    @media (min-width: 768px) {
+      .section-title { font-size: 36px; }
+    }
+
+    .section-subtitle {
+      font-family: "Noto Serif SC", serif;
+      font-size: 16px;
+      color: var(--text-secondary);
+      margin-bottom: 48px;
+    }
+
+    /* About */
+    .about-grid {
+      display: grid;
+      gap: 48px;
+      align-items: start;
+    }
+    @media (min-width: 768px) {
+      .about-grid { grid-template-columns: 1fr 1.2fr; gap: 60px; }
+    }
+
+    .about-grid > div:first-child {
+      text-align: center;
+    }
+
+    .avatar-wrap {
+      position: relative;
+      display: inline-block;
+      margin-bottom: 24px;
+    }
+    .avatar-wrap img.avatar {
+      width: 180px;
+      height: 180px;
+      object-fit: cover;
+      border-radius: 8px;
+      box-shadow: 0 8px 30px rgba(0,0,0,0.08);
+      border: 4px solid var(--soft-pink);
+    }
+
+    .about-bio {
+      font-size: 15px;
+      line-height: 1.8;
+      color: var(--text-secondary);
+      margin-bottom: 24px;
+      text-align: left;
+    }
+
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-bottom: 40px;
+      justify-content: center;
+    }
+    .tag {
+      display: inline-block;
+      padding: 8px 20px;
+      border: 1px solid var(--haze-blue);
+      border-radius: 50px;
+      font-family: "Space Mono", monospace;
+      font-size: 13px;
+      color: var(--haze-blue);
+      background: transparent;
+      cursor: pointer;
+      transition: all 0.3s;
+      text-decoration: none;
+    }
+    .tag:hover {
+      background: var(--haze-blue);
+      color: #fff;
+      transform: translateY(-2px);
+    }
+
+    @media (max-width: 767px) {
+      .tags {
+        flex-wrap: nowrap;
+        gap: 4px;
+      }
+      .tag {
+        font-size: 11px;
+        padding: 5px 8px;
+        white-space: nowrap;
+      }
+    }
+
+    /* Timeline */
+    .timeline-wrap {
+      position: relative;
+      padding: 20px 0;
+    }
+    .timeline-svg {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+    }
+    .timeline-svg path {
+      stroke: var(--haze-blue);
+      stroke-width: 2;
+      fill: none;
+      opacity: 0.3;
+      stroke-linecap: round;
+    }
+    .timeline-item {
+      position: relative;
+      margin-bottom: 48px;
+      padding-left: 16px;
+    }
+    .timeline-item .year {
+      font-family: "Space Mono", monospace;
+      font-size: 18px;
+      color: var(--haze-blue);
+      margin-bottom: 4px;
+    }
+    .timeline-item .company {
+      font-family: "Noto Serif SC", serif;
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: 4px;
+    }
+    .timeline-item .desc {
+      font-size: 14px;
+      color: var(--text-secondary);
+      line-height: 1.6;
+    }
+
+    .about-cta {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      margin-top: 40px;
+    }
+    .about-cta img {
+      width: 96px;
+      animation: wiggle 3s ease-in-out infinite;
+    }
+    .btn-primary {
+      display: inline-block;
+      padding: 10px 24px;
+      background: var(--haze-blue);
+      color: #fff;
+      border-radius: 50px;
+      text-decoration: none;
+      font-family: "Noto Serif SC", serif;
+      font-size: 14px;
+      white-space: nowrap;
+      transition: all 0.3s;
+      box-shadow: 0 4px 15px rgba(96,130,192,0.2);
+    }
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(96,130,192,0.3);
+    }
+
+    /* Copywriting Carousel */
+    .dot-grid-bg {
+      background-color: var(--milk-white);
+      background-image: radial-gradient(circle, var(--dot-color) 1px, transparent 1px);
+      background-size: 24px 24px;
+    }
+
+    #copywriting { padding: 40px 0; }
+    @media (min-width: 768px) { #copywriting { padding: 60px 0; } }
+
+    .carousel-container {
+      overflow: hidden;
+      position: relative;
+    }
+    .carousel-track {
+      display: flex;
+      transition: transform 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+    .carousel-slide {
+      min-width: 100%;
+      padding: 0 0 8px;
+      box-sizing: border-box;
+    }
+    @media (min-width: 768px) {
+      .carousel-slide { padding: 0 40px 8px; }
+    }
+
+    .carousel-dots {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      margin-top: 12px;
+    }
+    .carousel-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      border: none;
+      background: var(--text-muted);
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+    .carousel-dot.active {
+      background: var(--haze-blue);
+      transform: scale(1.2);
+    }
+
+    #copywriting .section-subtitle { margin-bottom: 16px; }
+
+    .copy-hint {
+      font-family: "Space Mono", monospace;
+      font-size: 12px;
+      color: var(--text-muted);
+      margin-top: 8px;
+    }
+
+    .copy-preface {
+      font-size: 13px;
+      line-height: 1.9;
+      color: var(--text-secondary);
+      margin-bottom: 16px;
+    }
+
+    .copy-body {
+      font-family: "Noto Serif SC", serif;
+      font-size: 12px;
+      line-height: 1.3;
+      color: var(--text-secondary);
+      white-space: pre-line;
+      margin-bottom: 16px;
+    }
+    .copy-body p { margin-bottom: 0.05em; }
+    .copy-body .last-line {
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-top: 0.5em;
+    }
+
+    .copy-note {
+      font-family: "Space Mono", monospace;
+      font-size: 11px;
+      color: var(--text-muted);
+      line-height: 1.7;
+      margin-top: 8px;
+      padding-left: 8px;
+      border-left: 2px solid rgba(96,130,192,0.2);
+    }
+
+    .copy-deco {
+      width: 210px;
+      margin-top: 4px;
+      margin-left: auto;
+      opacity: 0.9;
+      display: block;
+    }
+
+    /* Design Section */
+    .design-hero {
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      gap: 16px;
+      position: relative;
+      margin-top: 60px;
+      padding: 0 20px;
+    }
+    @media (min-width: 768px) {
+      .design-hero { gap: 32px; margin-top: 80px; }
+    }
+
+    .paperclip {
+      position: absolute;
+      top: -24px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 20;
+      width: 28px;
+      height: 56px;
+      filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1));
+    }
+
+    .sticky-note {
+      position: relative;
+      cursor: pointer;
+      transition: transform 0.3s;
+    }
+    .sticky-note:hover { transform: scale(1.02); }
+    .sticky-note:nth-child(2) { animation: sway 4s ease-in-out infinite; }
+    .sticky-note:nth-child(3) { animation: sway 4s ease-in-out infinite; animation-delay: 0.5s; }
+
+    .note-card {
+      background: var(--milk-white);
+      width: 130px;
+      height: 170px;
+      border-radius: 2px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.08), 0 1px 3px rgba(0,0,0,0.05);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+      position: relative;
+    }
+    .note-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--haze-blue), var(--soft-pink));
+      opacity: 0.3;
+    }
+    @media (min-width: 768px) {
+      .note-card { width: 200px; height: 260px; padding: 28px; }
+    }
+
+    .note-label {
+      font-family: "Space Mono", monospace;
+      font-size: 10px;
+      color: var(--text-muted);
+      margin-bottom: 10px;
+    }
+    .note-title {
+      font-family: "Noto Serif SC", serif;
+      font-size: 16px;
+      color: var(--text-primary);
+    }
+    @media (min-width: 768px) {
+      .note-title { font-size: 20px; }
+    }
+
+    /* Video Section */
+    .video-grid {
+      display: grid;
+      gap: 24px;
+    }
+    @media (min-width: 768px) {
+      .video-grid { grid-template-columns: repeat(2, 1fr); gap: 32px; }
+    }
+
+    .video-card {
+      background: var(--rice-white);
+      border-radius: 16px;
+      padding: 24px;
+      box-shadow: 0 4px 20px rgba(96,130,192,0.06);
+      transition: all 0.3s;
+    }
+    .video-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 30px rgba(96,130,192,0.1);
+    }
+
+    .cover-wrap {
+      position: relative;
+      margin-bottom: 16px;
+    }
+    .cover-wrap img.cover {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      border-radius: 8px;
+    }
+    @media (min-width: 768px) {
+      .cover-wrap img.cover { height: 220px; }
+    }
+    .cover-wrap .meta {
+      position: absolute;
+      bottom: 12px;
+      right: 12px;
+      display: inline-block;
+      font-family: "Space Mono", monospace;
+      font-size: 12px;
+      color: #fff;
+      background: rgba(96, 130, 192, 0.85);
+      padding: 4px 10px;
+      border-radius: 50px;
+      margin-bottom: 0;
+      z-index: 2;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+
+    .video-card h3 {
+      font-family: "Noto Serif SC", serif;
+      font-size: 18px;
+      font-weight: 700;
+      margin-bottom: 8px;
+      color: var(--text-primary);
+    }
+    .video-card p {
+      font-size: 14px;
+      color: var(--text-secondary);
+      line-height: 1.6;
+      margin-bottom: 8px;
+    }
+    .video-card .award {
+      font-size: 12px;
+      color: var(--accent-warm);
+      font-family: "Noto Serif SC", serif;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .video-card a.watch {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--haze-blue);
+      text-decoration: none;
+      font-size: 14px;
+      font-family: "Space Mono", monospace;
+      transition: gap 0.3s;
+    }
+    .video-card a.watch:hover { gap: 12px; }
+
+    /* Footer */
+    #contact {
+      background: var(--haze-blue);
+      color: #fff;
+      position: relative;
+      overflow: hidden;
+    }
+    .contact-inner {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+    }
+    .contact-inner h2 {
+      font-family: "Noto Serif SC", serif;
+      font-size: 28px;
+      margin-bottom: 12px;
+    }
+    .contact-inner .sub {
+      font-family: "Noto Serif SC", serif;
+      font-size: 16px;
+      opacity: 0.9;
+      margin-bottom: 40px;
+    }
+    .btn-white {
+      display: inline-block;
+      padding: 14px 36px;
+      background: #fff;
+      color: var(--haze-blue);
+      border-radius: 50px;
+      text-decoration: none;
+      font-family: "Noto Serif SC", serif;
+      font-size: 15px;
+      margin-bottom: 40px;
+      transition: all 0.3s;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    }
+    .btn-white:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+    }
+    .contact-links {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 16px;
+      font-family: "Space Mono", monospace;
+      font-size: 14px;
+    }
+    .contact-links button {
+      color: #fff;
+      text-decoration: none;
+      background: none;
+      border: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      transition: opacity 0.3s;
+      font-family: "Space Mono", monospace;
+    }
+    .contact-links button:hover { opacity: 0.8; }
+    @media (min-width: 768px) {
+      .contact-links { flex-direction: row; justify-content: center; gap: 48px; }
+    }
+
+    /* Modal */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.4);
+      backdrop-filter: blur(4px);
+      z-index: 2000;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+    .modal-overlay.active {
+      display: flex;
+      opacity: 1;
+    }
+    .modal-box {
+      background: var(--milk-white);
+      border-radius: 16px;
+      max-width: 800px;
+      width: 100%;
+      max-height: 90vh;
+      overflow-y: auto;
+      padding: 40px 24px;
+      position: relative;
+      transform: scale(0.9) translateY(20px);
+      opacity: 0;
+      transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+      box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+    }
+    @media (min-width: 768px) {
+      .modal-box { padding: 48px; }
+    }
+    .modal-overlay.active .modal-box {
+      transform: scale(1) translateY(0);
+      opacity: 1;
+    }
+    .modal-close {
+      position: absolute;
+      top: 16px;
+      right: 16px;
+      background: none;
+      border: none;
+      font-size: 24px;
+      color: var(--text-muted);
+      cursor: pointer;
+      transition: color 0.3s;
+    }
+    .modal-close:hover { color: var(--text-primary); }
+    .modal-header {
+      font-family: "Space Mono", monospace;
+      font-size: 12px;
+      color: var(--text-muted);
+      margin-bottom: 24px;
+      letter-spacing: 0.05em;
+    }
+    .modal-body h3 {
+      font-family: "Noto Serif SC", serif;
+      font-size: 22px;
+      margin-bottom: 16px;
+      color: var(--text-primary);
+    }
+    .modal-body p {
+      font-size: 15px;
+      line-height: 1.8;
+      color: var(--text-secondary);
+      margin-bottom: 16px;
+    }
+    .modal-body img {
+      border-radius: 8px;
+      margin: 16px 0;
+    }
+    .emoji-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+      margin-top: 16px;
+    }
+    .emoji-grid img {
+      width: 100%;
+      aspect-ratio: 1;
+      object-fit: cover;
+      border-radius: 8px;
+      transition: transform 0.3s;
+    }
+    .emoji-grid img:hover { transform: scale(1.05); }
+
+    /* Toast */
+    .toast {
+      position: fixed;
+      bottom: 40px;
+      left: 50%;
+      transform: translateX(-50%) translateY(20px);
+      background: var(--text-primary);
+      color: #fff;
+      padding: 12px 24px;
+      border-radius: 50px;
+      font-family: "Space Mono", monospace;
+      font-size: 13px;
+      z-index: 3000;
+      opacity: 0;
+      transition: all 0.4s;
+      pointer-events: none;
+    }
+    .toast.show {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Audio -->
+  <audio id="bgm-audio" loop preload="none">
+    <source src="https://dlink.host/1drv/aHR0cHM6Ly8xZHJ2Lm1zL3UvYy8yNjgyYzk4ZjhkZTRkYTQ4L0lRQjFTa0xxbS0zb1JKc05peWJUN1RubkFTQV9uTnY5aEVIZmlLUEI3bmF2aGdvP2U9ME50TjlR.mp3" type="audio/mpeg">
+  </audio>
+
+  <!-- Navigation -->
+  <nav id="navbar">
+    <div class="nav-left">
+      <button class="nav-btn" id="langToggle" onclick="toggleLang()">中 / EN</button>
+      <button class="nav-btn" id="bgmToggle" onclick="toggleBgm()">
+        <i class="fa-solid fa-music" id="bgmIcon"></i>
+      </button>
+    </div>
+    <div class="nav-links" id="navLinks">
+      <a href="#about" data-nav data-key="nav.about">关于我</a>
+      <a href="#copywriting" data-nav data-key="nav.copy">文案</a>
+      <a href="#design" data-nav data-key="nav.design">设计</a>
+      <a href="#video" data-nav data-key="nav.video">影像</a>
+      <a href="#contact" data-nav data-key="nav.contact">联系</a>
+    </div>
+    <button class="hamburger" onclick="toggleMenu()"><i class="fa-solid fa-bars"></i></button>
+  </nav>
+
+  <!-- Mobile Menu -->
+  <div id="mobile-menu">
+    <button class="close-btn" onclick="toggleMenu()"><i class="fa-solid fa-xmark"></i></button>
+    <a href="#about" onclick="toggleMenu()" data-key="nav.about">关于我</a>
+    <a href="#copywriting" onclick="toggleMenu()" data-key="nav.copy">文案</a>
+    <a href="#design" onclick="toggleMenu()" data-key="nav.design">设计</a>
+    <a href="#video" onclick="toggleMenu()" data-key="nav.video">影像</a>
+    <a href="#contact" onclick="toggleMenu()" data-key="nav.contact">联系</a>
+  </div>
+
+  <!-- Hero -->
+  <section id="hero">
+    <div class="floating-chars" id="floatingChars"></div>
+
+    <div class="hero-center">
+      <div class="hero-logo-wrap">
+        <div class="hero-greeting hi" data-key="hero.hi">嗨</div>
+        <img src="https://img.heliar.top/file/1781281233952_IMG_20260613_001937.png" alt="Logo" class="animate-breathe">
+        <div class="hero-name-below">
+          <span data-key="hero.im">我是</span>
+          <span data-key="hero.name">陈春延</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="hero-quote">
+      <p data-key="hero.line1">做喜欢的事</p>
+      <p data-key="hero.line2">用喜欢的工具</p>
+      <p data-key="hero.line3">写喜欢的文字</p>
+      <p data-key="hero.line4">拍喜欢的画面</p>
+      <p data-key="hero.line5">过喜欢的生活</p>
+    </div>
+  </section>
+
+  <!-- About -->
+  <section id="about" class="reveal">
+    <div class="container">
+      <h2 class="section-title text-center" data-key="about.title">关于我</h2>
+
+      <div class="about-grid">
+        <div>
+          <div class="avatar-wrap">
+            <img src="https://img.heliar.top/file/1781245787121_MTXX_MH20260612_142555903.jpg" alt="头像" class="avatar">
+          </div>
+          <p class="about-bio" data-key="about.bio">
+            一位兼具数据洞察与创意策划的内容多面手，擅长将复杂议题转译为有传播力的品牌语言，创作横跨视觉、文案与影像的文艺载体。政府、媒体与企业的跨界背景赋予我政策解读力与大众传播力的双重视角。我相信，好创意不止于灵光一现，更在于从洞察到审美落地的全流程执行力。
+          </p>
+
+          <div class="tags">
+            <button class="tag" onclick="openModal('data')" data-key="about.tag1">数据分析</button>
+            <a class="tag" href="#copywriting" data-key="about.tag2">文案策划</a>
+            <a class="tag" href="#design" data-key="about.tag3">品牌视觉</a>
+            <a class="tag" href="#video" data-key="about.tag4">影像制作</a>
+          </div>
+        </div>
+
+        <div class="timeline-wrap">
+          <svg class="timeline-svg" viewBox="0 0 400 400" preserveAspectRatio="none">
+            <path d="M 100 50 Q 250 100 300 150 Q 250 200 100 250 Q 250 300 300 350" 
+                  stroke="var(--haze-blue)" stroke-width="2" fill="none" opacity="0.3" stroke-linecap="round"/>
+            <g transform="translate(100,50)">
+              <circle r="10" fill="var(--haze-blue)" opacity="0.15"/>
+              <path d="M0,-6 L1.2,-1.2 L6,0 L1.2,1.2 L0,6 L-1.2,1.2 L-6,0 L-1.2,-1.2 Z" fill="var(--haze-blue)"/>
+            </g>
+            <g transform="translate(300,150)">
+              <circle r="10" fill="var(--haze-blue)" opacity="0.15"/>
+              <path d="M0,-6 L1.2,-1.2 L6,0 L1.2,1.2 L0,6 L-1.2,1.2 L-6,0 L-1.2,-1.2 Z" fill="var(--haze-blue)"/>
+            </g>
+            <g transform="translate(100,250)">
+              <circle r="10" fill="var(--haze-blue)" opacity="0.15"/>
+              <path d="M0,-6 L1.2,-1.2 L6,0 L1.2,1.2 L0,6 L-1.2,1.2 L-6,0 L-1.2,-1.2 Z" fill="var(--haze-blue)"/>
+            </g>
+          </svg>
+          <div style="position:relative; z-index:2;">
+            <div class="timeline-item" style="margin-left: 80px;">
+              <div class="year">2023-2024</div>
+              <div class="company">广州市从化区消防救援大队</div>
+              <div class="desc">内容策划与品牌荣誉全流程管理</div>
+            </div>
+            <div class="timeline-item" style="margin-left: 220px;">
+              <div class="year">2022-2023</div>
+              <div class="company">消费者报道杂志社</div>
+              <div class="desc">舆情监测与深度写作</div>
+            </div>
+            <div class="timeline-item" style="margin-left: 80px;">
+              <div class="year">2020-2021</div>
+              <div class="company">南方都市报、广东卫视等媒体机构</div>
+              <div class="desc">数据项目运营/纪实外拍</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="about-cta">
+        <img src="https://img.heliar.top/file/1781251803514_box10.png" alt="">
+        <a href="#contact" class="btn-primary" data-key="about.contact">联系我</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Copywriting -->
+  <section id="copywriting" class="dot-grid-bg reveal">
+    <div class="container" style="max-width: 900px;">
+      <div class="carousel-container">
+        <div class="carousel-track" id="copyTrack">
+
+          <!-- Slide 1 -->
+          <div class="carousel-slide">
+            <h2 class="section-title" data-key="copywriting.title">言之有物</h2>
+            <p class="section-subtitle" data-key="copywriting.subtitle">以文字为媒介，让品牌理念深入人心</p>
+            <p class="copy-preface" data-key="copywriting.preface">
+              以下两则文案围绕利郎LESS IS MORE轻时尚系列创作，该系列主打「都市通勤 简而不凡」，面向90后、00后男性消费群体主要竞品包括UR、太平鸟、杰克琼斯，作品均荣获创意星球学院奖广告文案类优秀奖。
+            </p>
+            <p class="copy-hint" data-key="copywriting.hint">> 向左滑动查看文案</p>
+            <img src="https://img.heliar.top/file/1781251813845_box7.png" class="copy-deco" alt="">
+          </div>
+
+          <!-- Slide 2 -->
+          <div class="carousel-slide">
+            <h3 class="section-title" style="font-size: 18px; margin-bottom: 8px;">宇宙</h3>
+            <div class="copy-body">
+              <p>年轻的你，有着自己的宇宙，</p>
+              <p>冲浪，你比浪勇猛；</p>
+              <p>下棋，你比棋睿智；</p>
+              <p>饮酒，你比酒醇厚；</p>
+              <p>听歌，你比歌多情……</p>
+              <p>穿你喜欢的，做你爱做的，</p>
+              <p>在你的宇宙里，</p>
+              <p>他们最后都会成为美丽的星球，</p>
+              <p>而我是只为你而转的行星。</p>
+              <p class="last-line">LESS IS MORE，让你的宇宙无限大。</p>
+            </div>
+            <p class="copy-note" data-key="copywriting.universe.note">
+              //创作思路：目标受众是90、00后男性群体，他们都极具个性，并且多面。LESS IS MO RE的新意义可以从这点出发，虽是个体（LESS），却有自己的宇宙、多面（MORE）
+            </p>
+          </div>
+
+          <!-- Slide 3 -->
+          <div class="carousel-slide">
+            <h3 class="section-title" style="font-size: 18px; margin-bottom: 8px;">英雄</h3>
+            <div class="copy-body">
+              <p>①：我喜欢小动物，给他们温暖的家；</p>
+              <p>②：我喜欢弹吉他，与听众情感共振；</p>
+              <p>③：我喜欢布偶装，装饰小朋友的梦；</p>
+              <p>④：我喜欢画漫画，跌跌撞撞的成年人也能看到希望；</p>
+              <p>①：凭着兴趣爱好那点儿事，能有什么作为吗？</p>
+              <p>②：爸妈说，别折腾了，老老实实回家做份正经工作 不好吗？</p>
+              <p>③：只是我看到每一张天真的笑脸，心里就甜成蜜浆。</p>
+              <p>④：只是看到每一位得到勇气的读者，</p>
+              <p>所有的辛苦都会化作一滩温柔。</p>
+              <p>小时候我们幻想像超人一样拯救世界，</p>
+              <p>如今我们用自己的力量改变世界。</p>
+              <p class="last-line">小人物，大力量，LESS IS MORE</p>
+            </div>
+            <p class="copy-note" data-key="copywriting.hero.note">
+              //创作思路：男孩小时候多少都有英雄梦，长大不意味着梦消失了，男孩们都在用自己的力量让这个世界变得更美好。从4个从事不同非主流职业的年轻男性视角讲述自己职业的魅力和他们共同的心声，利郎助力男孩们勇于追寻自己的梦想。
+            </p>
+          </div>
+
+        </div>
+
+        <div class="carousel-dots">
+          <button class="carousel-dot active" onclick="goToSlide(0)"></button>
+          <button class="carousel-dot" onclick="goToSlide(1)"></button>
+          <button class="carousel-dot" onclick="goToSlide(2)"></button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Design -->
+  <section id="design" class="reveal" style="background: var(--soft-pink);">
+    <div class="container" style="text-align: center;">
+      <h2 class="section-title" data-key="design.title">视觉叙事</h2>
+      <p class="section-subtitle" data-key="design.subtitle">以设计为语言，构建品牌的视觉记忆</p>
+
+      <div class="design-hero">
+        <!-- Paperclip SVG -->
+        <svg class="paperclip" viewBox="0 0 40 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M12 75V20C12 13 17 8 24 8C31 8 36 13 36 20V55C36 62 31 67 24 67C17 67 12 62 12 55V25" stroke="#A0A0A0" stroke-width="3" stroke-linecap="round"/>
+          <path d="M12 75C12 78 10 80 8 80C6 80 4 78 4 75V20C4 8 12 0 24 0C36 0 44 8 44 20V55C44 67 36 75 24 75" stroke="#C0C0C0" stroke-width="3" stroke-linecap="round"/>
+        </svg>
+
+        <div class="sticky-note" onclick="openModal('poster')">
+          <div class="note-card">
+            <span class="note-label">POSTER</span>
+            <h4 class="note-title" data-key="design.poster.label">获奖海报</h4>
+          </div>
+        </div>
+
+        <div class="sticky-note" onclick="openModal('ip')">
+          <div class="note-card">
+            <span class="note-label">IP</span>
+            <h4 class="note-title" data-key="design.ip.label">原创IP</h4>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Video -->
+  <section id="video" class="reveal">
+    <div class="container">
+      <h2 class="section-title text-center" data-key="video.title">影像纪实</h2>
+      <p class="section-subtitle text-center" data-key="video.subtitle">以镜头为笔，记录真实与美学的交织瞬间</p>
+
+      <div class="video-grid">
+        <div class="video-card">
+          <div class="cover-wrap">
+            <img src="https://img.heliar.top/file/1781183754833_vedio3.jpg" alt="时尚博主花絮vlog" class="cover">
+            <span class="meta">6min</span>
+          </div>
+          <h3>【时尚博主花絮vlog】</h3>
+          <p>为29.3万粉博主@Charlene拍摄品牌Elliatt联名穿搭花絮，获点赞170+、评论40+，助力社媒内容质感升级。</p>
+          <a href="http://xhslink.com/o/72b6r2BjOzf" target="_blank" class="watch" data-key="video.watch">
+            <i class="fa-solid fa-play"></i> 观看
+          </a>
+        </div>
+
+        <div class="video-card">
+          <div class="cover-wrap">
+            <img src="https://img.heliar.top/file/1781183607880_vedio2.jpg" alt="一个新闻人的信仰" class="cover">
+            <span class="meta">5min</span>
+          </div>
+          <h3>《一个新闻人的信仰》纪录片</h3>
+          <p>主导全流程（选题、拍摄、剪辑），探寻新闻背后的坚守</p>
+          <div class="award"><i class="fa-solid fa-trophy"></i> 第五届全国大学生网络编辑创新大赛短视频优秀奖</div>
+          <a href="https://pan.baidu.com/s/1FgFDlRhNisnyq3jvUn4xIw?pwd=m5nt" target="_blank" class="watch" data-key="video.watch">
+            <i class="fa-solid fa-play"></i> 观看
+          </a>
+        </div>
+
+        <div class="video-card">
+          <div class="cover-wrap">
+            <img src="https://img.heliar.top/file/1781460871348_tu.png" alt="跑好最后一公里" class="cover">
+            <span class="meta">每集45min</span>
+          </div>
+          <h3>《跑好最后一公里》纪录片</h3>
+          <p>深入粤西贫困村实地外采，参与记录脱贫攻坚真实影像</p>
+          <div class="award"><i class="fa-solid fa-trophy"></i> 第十九届中国（广州）国际纪录片节金红棉优秀纪录片组委会特别推荐优秀纪录片奖</div>
+          <a href="https://www.bilibili.com/video/BV1vU4y1g7Qz/" target="_blank" class="watch" data-key="video.watch">
+            <i class="fa-solid fa-play"></i> 观看
+          </a>
+        </div>
+
+        <div class="video-card">
+          <div class="cover-wrap">
+            <img src="https://img.heliar.top/file/1781183617894_vedio4.jpg" alt="主持人大赛选手概念视频" class="cover">
+            <span class="meta">1min</span>
+          </div>
+          <h3>【主持人大赛选手概念视频】</h3>
+          <p>为校广播台主持人大赛选手量身打造的视觉概念短片</p>
+          <a href="https://pan.baidu.com/s/1-X7Fr68tSW8I4jhVLAKf7g?pwd=iabi" target="_blank" class="watch" data-key="video.watch">
+            <i class="fa-solid fa-play"></i> 观看
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section id="contact">
+    <div class="container contact-inner">
+      <h2 data-key="contact.title">期待与你合作</h2>
+      <p class="sub" data-key="contact.subtitle">无论是全职机会还是项目合作，欢迎随时联系</p>
+      <a href="https://pan.baidu.com/s/1hTS2bZ_qY6h7PY7cvroYkQ?pwd=cu5y" target="_blank" class="btn-white" data-key="contact.download">
+        <i class="fa-solid fa-download" style="margin-right:8px;"></i> 下载简历
+      </a>
+      <div class="contact-links">
+        <button onclick="copyEmail()">
+          <i class="fa-solid fa-envelope"></i> ccyhappy@foxmail.com
+        </button>
+        <button onclick="copyWechat()">
+          <i class="fa-brands fa-weixin"></i> doremiqvq
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Modal -->
+  <div class="modal-overlay" id="modal" onclick="closeModalOutside(event)">
+    <div class="modal-box" onclick="event.stopPropagation()">
+      <button class="modal-close" onclick="closeModal()"><i class="fa-solid fa-xmark"></i></button>
+      <div class="modal-header" id="modalHeader"></div>
+      <div class="modal-body" id="modalBody"></div>
+    </div>
+  </div>
+
+  <!-- Toast -->
+  <div class="toast" id="toast">已复制到剪贴板</div>
+
+  <script>
+    // i18n Data
+    const i18n = {
+      zh: {
+        'nav.about': '关于我', 'nav.copy': '文案', 'nav.design': '设计', 'nav.video': '影像', 'nav.contact': '联系',
+        'hero.hi': '嗨', 'hero.im': '我是', 'hero.name': '陈春延',
+        'hero.line1': '做喜欢的事', 'hero.line2': '用喜欢的工具', 'hero.line3': '写喜欢的文字', 'hero.line4': '拍喜欢的画面', 'hero.line5': '过喜欢的生活',
+        'about.title': '关于我',
+        'about.bio': '一位兼具数据洞察与创意策划的内容多面手，擅长将复杂议题转译为有传播力的品牌语言，创作横跨视觉、文案与影像的文艺载体。政府、媒体与企业的跨界背景赋予我政策解读力与大众传播力的双重视角。我相信，好创意不止于灵光一现，更在于从洞察到审美落地的全流程执行力。',
+        'about.tag1': '数据分析', 'about.tag2': '文案策划', 'about.tag3': '品牌视觉', 'about.tag4': '影像制作',
+        'about.contact': '联系我',
+        'copywriting.title': '言之有物', 'copywriting.subtitle': '以文字为媒介，让品牌理念深入人心',
+        'copywriting.preface': '以下两则文案围绕利郎LESS IS MORE轻时尚系列创作，该系列主打「都市通勤 简而不凡」，面向90后、00后男性消费群体主要竞品包括UR、太平鸟、杰克琼斯，作品均荣获创意星球学院奖广告文案类优秀奖。',
+        'copywriting.hint': '> 向左滑动查看文案',
+        'copywriting.universe.note': '//创作思路：目标受众是90、00后男性群体，他们都极具个性，并且多面。LESS IS MO RE的新意义可以从这点出发，虽是个体（LESS），却有自己的宇宙、多面（MORE）',
+        'copywriting.hero.note': '//创作思路：男孩小时候多少都有英雄梦，长大不意味着梦消失了，男孩们都在用自己的力量让这个世界变得更美好。从4个从事不同非主流职业的年轻男性视角讲述自己职业的魅力和他们共同的心声，利郎助力男孩们勇于追寻自己的梦想。',
+        'design.title': '视觉叙事', 'design.subtitle': '以设计为语言，构建品牌的视觉记忆',
+        'design.poster.label': '获奖海报', 'design.ip.label': '原创IP',
+        'video.title': '影像纪实', 'video.subtitle': '以镜头为笔，记录真实与美学的交织瞬间', 'video.watch': '观看',
+        'contact.title': '期待与你合作', 'contact.subtitle': '无论是全职机会还是项目合作，欢迎随时联系', 'contact.download': '下载简历',
+        'modal.data.header': 'DATA_ANALYSIS / 消费者报道',
+        'modal.data.text': '在消费者报道杂志社期间，负责舆情监测与深度写作，通过数据挖掘洞察消费趋势，产出多篇有影响力的调查报道。',
+        'modal.poster.header': 'POSTER_01 / 灵敏的不止烟雾报警器',
+        'modal.poster.name': '灵敏的不止烟雾报警器',
+        'modal.poster.concept': '将消防保密主题与日常生活符号“烟雾报警器”进行隐喻嫁接——敏感警觉不止于设备，更在于保密意识。用极简视觉传达政务严肃主题，兼具传播力与权威认可。',
+        'modal.poster.award': '获应急管理部、国家消防救援局联合推荐参加中央保密办评选（共18个推荐名额，广州市唯一入选单位）',
+        'modal.ip.header': 'IP_01 / 只是海盐',
+        'modal.ip.name': '只是海盐',
+        'modal.ip.desc': '只是猫性格温和，喜欢做菜、堆积木，它有一个活泼的朋友“海盐”，总爱找它玩，两只小动物性格互补，在日常相处中碰撞出i人和e人的趣味火花。',
+        'modal.ip.philosophy': '只是猫的外形配色取自"芝士"，"芝士"音同"只是"。取名"只是猫"想传递一种chill的生活哲学——它只是一只猫，好好吃饭、睡觉、发呆就好。人也只是人，不必活得太用力。而"海盐"身形小巧，性格清爽，像夏日海风般给人带来松弛感。',
+        'toast': '已复制到剪贴板'
+      },
+      en: {
+        'nav.about': 'About', 'nav.copy': 'Copy', 'nav.design': 'Design', 'nav.video': 'Video', 'nav.contact': 'Contact',
+        'hero.hi': 'Hi', 'hero.im': "I'm", 'hero.name': 'Tanya',
+        'hero.line1': 'Do what you love', 'hero.line2': 'Use tools you love', 'hero.line3': 'Write words you love', 'hero.line4': 'Shoot frames you love', 'hero.line5': 'Live a life you love',
+        'about.title': 'About',
+        'about.bio': 'A versatile content creator with data insights and creative planning skills, adept at translating complex topics into compelling brand narratives. My work spans visual design, copywriting, and video production. Cross-sector experience in government, media, and corporate environments gives me dual perspectives on policy interpretation and mass communication. I believe that great creativity lies not only in flashes of inspiration but in the full execution from insight to aesthetic delivery.',
+        'about.tag1': 'Data Analysis', 'about.tag2': 'Copywriting', 'about.tag3': 'Brand Visual', 'about.tag4': 'Video Production',
+        'about.contact': 'Contact Me',
+        'copywriting.title': 'Words Matter', 'copywriting.subtitle': 'Using words as a medium to make brand philosophy resonate',
+        'copywriting.preface': 'The following two copies were created for LILANZ LESS IS MORE light fashion series, which focuses on "urban commuting, simple yet extraordinary", targeting post-90s and post-00s male consumers. Main competitors include UR, Peacebird, and Jack & Jones. Both works won the Excellence Award in the Advertising Copy category at the Creative Star Academy Awards.',
+        'copywriting.hint': '> Swipe left to view copy',
+        'copywriting.universe.note': '//Creative insight: The target audience is post-90s and post-00s male groups who are highly individualistic and multi-faceted. The new meaning of LESS IS MORE can start from this point: although an individual (LESS), they have their own universe and multiple facets (MORE).',
+        'copywriting.hero.note': '//Creative insight: Boys always dream of being heroes when young; growing up does not mean the dream disappears. Boys are using their own strength to make this world a better place. From the perspective of four young men in different non-mainstream professions, telling the charm of their careers and their shared voice. LILANZ empowers boys to bravely pursue their dreams.',
+        'design.title': 'Visual Narrative', 'design.subtitle': 'Using design as language to build brand visual memory',
+        'design.poster.label': 'Award Poster', 'design.ip.label': 'Original IP',
+        'video.title': 'Video Documentary', 'video.subtitle': 'Using the lens as a pen to record the interweaving of reality and aesthetics', 'video.watch': 'Watch',
+        'contact.title': "Let's Work Together", 'contact.subtitle': 'Whether full-time opportunities or project collaborations, feel free to reach out anytime', 'contact.download': 'Download CV',
+        'modal.data.header': 'DATA_ANALYSIS / Consumer Reports',
+        'modal.data.text': 'During my time at Consumer Reports Magazine, I was responsible for public opinion monitoring and in-depth writing, mining consumer trends through data, and producing multiple influential investigative reports.',
+        'modal.poster.header': 'POSTER_01 / More Than Alarms',
+        'modal.poster.name': 'More Than Alarms',
+        'modal.poster.concept': 'Metaphorically grafting the fire protection confidentiality theme with the daily life symbol "smoke alarm" — sensitivity and vigilance are not limited to devices, but lie in confidentiality awareness. Using minimalist visuals to convey serious government themes, combining communication power with authoritative recognition.',
+        'modal.poster.award': 'Recommended by the Ministry of Emergency Management and the National Fire and Rescue Administration to participate in the Central Confidentiality Office selection (one of 18 recommended slots, the only selected unit in Guangzhou).',
+        'modal.ip.header': 'IP_01 / Just Sea Salt',
+        'modal.ip.name': 'Just Sea Salt',
+        'modal.ip.desc': 'Zhishi Cat has a gentle personality, loves cooking and building blocks. It has a lively friend "Sea Salt" who always looks for it to play. The two animals have complementary personalities, creating interesting sparks between introverts and extroverts in their daily interactions.',
+        'modal.ip.philosophy': 'Zhishi Cat\'s color scheme comes from "cheese", which sounds like "zhishi" (just/is). The name "Zhishi Cat" conveys a chill life philosophy — it is just a cat, eating, sleeping, and daydreaming well. Humans are just humans, no need to live too hard. "Sea Salt" is small and refreshing, bringing a relaxed feeling like a summer sea breeze.',
+        'toast': 'Copied to clipboard'
+      }
+    };
+
+    let currentLang = 'zh';
+    let isPlaying = false;
+    let currentSlide = 0;
+
+    // Init
+    document.addEventListener('DOMContentLoaded', () => {
+      createFloatingChars();
+      initScrollSpy();
+      initCarouselSwipe();
+      initReveal();
+    });
+
+    // Floating chars
+    function createFloatingChars() {
+      const container = document.getElementById('floatingChars');
+      const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+      for (let i = 0; i < 12; i++) {
+        const span = document.createElement('span');
+        span.textContent = chars[Math.floor(Math.random() * chars.length)];
+        span.style.left = Math.random() * 100 + '%';
+        span.style.top = Math.random() * 100 + '%';
+        span.style.fontSize = (10 + Math.random() * 14) + 'px';
+        span.style.animationDuration = (10 + Math.random() * 15) + 's';
+        span.style.animationDelay = (Math.random() * 5) + 's';
+        if (Math.random() > 0.7) span.style.filter = 'blur(1px)';
+        container.appendChild(span);
+      }
+    }
+
+    // Language
+    function toggleLang() {
+      currentLang = currentLang === 'zh' ? 'en' : 'zh';
+      document.documentElement.lang = currentLang === 'zh' ? 'zh-CN' : 'en';
+      document.querySelectorAll('[data-key]').forEach(el => {
+        const key = el.getAttribute('data-key');
+        if (i18n[currentLang][key]) {
+          if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') {
+            el.placeholder = i18n[currentLang][key];
+          } else {
+            el.textContent = i18n[currentLang][key];
+          }
+        }
+      });
+      document.getElementById('langToggle').textContent = currentLang === 'zh' ? '中 / EN' : 'EN / 中';
+    }
+
+    // BGM
+    function toggleBgm() {
+      const audio = document.getElementById('bgm-audio');
+      const icon = document.getElementById('bgmIcon');
+      if (isPlaying) {
+        audio.pause();
+        icon.classList.remove('animate-pulse-music');
+      } else {
+        audio.play().catch(() => {});
+        icon.classList.add('animate-pulse-music');
+      }
+      isPlaying = !isPlaying;
+    }
+
+    // Mobile Menu
+    function toggleMenu() {
+      document.getElementById('mobile-menu').classList.toggle('open');
+    }
+
+    // Scroll Spy
+    function initScrollSpy() {
+      const sections = ['about', 'copywriting', 'design', 'video', 'contact'];
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            const id = entry.target.id;
+            document.querySelectorAll('[data-nav]').forEach(a => {
+              const href = a.getAttribute('href').replace('#', '');
+              a.classList.toggle('active', href === id);
+            });
+          }
+        });
+      }, { threshold: 0.3, rootMargin: '-64px 0px 0px 0px' });
+
+      sections.forEach(id => {
+        const el = document.getElementById(id);
+        if (el) observer.observe(el);
+      });
+    }
+
+    // Reveal on scroll
+    function initReveal() {
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) entry.target.classList.add('visible');
+        });
+      }, { threshold: 0.1 });
+      document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+    }
+
+    // Carousel
+    function goToSlide(index) {
+      currentSlide = index;
+      const track = document.getElementById('copyTrack');
+      track.style.transform = `translateX(-${index * 100}%)`;
+      document.querySelectorAll('.carousel-dot').forEach((dot, i) => {
+        dot.classList.toggle('active', i === index);
+      });
+    }
+
+    function initCarouselSwipe() {
+      const track = document.getElementById('copyTrack');
+      let startX = 0;
+      track.addEventListener('touchstart', e => { startX = e.touches[0].clientX; }, { passive: true });
+      track.addEventListener('touchend', e => {
+        const diff = e.changedTouches[0].clientX - startX;
+        if (Math.abs(diff) > 50) {
+          if (diff < 0 && currentSlide < 2) goToSlide(currentSlide + 1);
+          if (diff > 0 && currentSlide > 0) goToSlide(currentSlide - 1);
+        }
+      }, { passive: true });
+    }
+
+    // Modal
+    function openModal(type) {
+      const modal = document.getElementById('modal');
+      const header = document.getElementById('modalHeader');
+      const body = document.getElementById('modalBody');
+
+      if (type === 'data') {
+        header.textContent = i18n[currentLang]['modal.data.header'];
+        body.innerHTML = `
+          <div style="display:flex; gap:20px; flex-wrap:wrap; align-items:flex-start;">
+            <img src="https://img.heliar.top/file/1781183645629_data.jpg" style="width:200px; border-radius:8px; flex-shrink:0;">
+            <p style="flex:1; min-width:200px;">${i18n[currentLang]['modal.data.text']}</p>
+          </div>
+        `;
+      } else if (type === 'poster') {
+        header.textContent = i18n[currentLang]['modal.poster.header'];
+        body.innerHTML = `
+          <h3>${i18n[currentLang]['modal.poster.name']}</h3>
+          <p>${i18n[currentLang]['modal.poster.concept']}</p>
+          <p style="color:var(--accent-warm); font-size:14px;"><i class="fa-solid fa-trophy" style="margin-right:6px;"></i>${i18n[currentLang]['modal.poster.award']}</p>
+          <img src="https://img.heliar.top/file/1781099511216_海报.jpg" style="max-height:400px; width:auto; margin:0 auto; display:block;">
+        `;
+      } else if (type === 'ip') {
+        header.textContent = i18n[currentLang]['modal.ip.header'];
+        body.innerHTML = `
+          <div style="display:flex; align-items:center; gap:16px; margin-bottom:16px;">
+            <img src="https://img.heliar.top/file/1781159286089_头像.jpg" style="width:80px; height:80px; border-radius:50%; object-fit:cover;">
+            <h3 style="margin:0;">${i18n[currentLang]['modal.ip.name']}</h3>
+          </div>
+          <p>${i18n[currentLang]['modal.ip.desc']}</p>
+          <p>${i18n[currentLang]['modal.ip.philosophy']}</p>
+          <div class="emoji-grid">
+            <img src="https://img.heliar.top/file/1781158064619_emoji1.jpeg" alt="">
+            <img src="https://img.heliar.top/file/1781158064879_emoji2.jpeg" alt="">
+            <img src="https://img.heliar.top/file/1781158061677_emoji3.jpeg" alt="">
+            <img src="https://img.heliar.top/file/1781158059030_emoji4.jpeg" alt="">
+            <img src="https://img.heliar.top/file/1781158063659_emoji5.jpeg" alt="">
+            <img src="https://img.heliar.top/file/1781158068747_emoji6.jpeg" alt="">
+            <img src="https://img.heliar.top/file/1781158063861_emoji7.jpeg" alt="">
+            <img src="https://img.heliar.top/file/1781158066888_emoji8.jpeg" alt="">
+          </div>
+        `;
+      }
+
+      modal.classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeModal() {
+      document.getElementById('modal').classList.remove('active');
+      document.body.style.overflow = '';
+    }
+
+    function closeModalOutside(e) {
+      if (e.target === document.getElementById('modal')) closeModal();
+    }
+
+    // Copy Email
+    function copyEmail() {
+      navigator.clipboard.writeText('ccyhappy@foxmail.com').then(() => {
+        const toast = document.getElementById('toast');
+        toast.textContent = i18n[currentLang]['toast'];
+        toast.classList.add('show');
+        setTimeout(() => toast.classList.remove('show'), 2000);
+      });
+    }
+
+    // Copy Wechat
+    function copyWechat() {
+      navigator.clipboard.writeText('doremiqvq').then(() => {
+        const toast = document.getElementById('toast');
+        toast.textContent = i18n[currentLang]['toast'];
+        toast.classList.add('show');
+        setTimeout(() => toast.classList.remove('show'), 2000);
+      });
+    }
+
+    // Escape to close modal
+    document.addEventListener('keydown', e => {
+      if (e.key === 'Escape') closeModal();
+    });
+  </script>
+</body>
+</html>
