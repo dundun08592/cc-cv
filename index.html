@@ -1265,10 +1265,13 @@
         'modal.poster.name': '灵敏的不止烟雾报警器',
         'modal.poster.concept': '将消防保密主题与日常生活符号“烟雾报警器”进行隐喻嫁接——敏感警觉不止于设备，更在于保密意识。用极简视觉传达政务严肃主题，兼具传播力与权威认可。',
         'modal.poster.award': '获应急管理部、国家消防救援局联合推荐参加中央保密办评选（共18个推荐名额，广州市唯一入选单位）',
-        'modal.ip.header': 'IP_01 / 只是海盐',
+        'modal.ip.header': 'IP_01 +02/ 只是海盐+虎咪咪',
         'modal.ip.name': '只是海盐',
         'modal.ip.desc': '只是猫性格温和，喜欢做菜、堆积木，它有一个活泼的朋友“海盐”，总爱找它玩，两只小动物性格互补，在日常相处中碰撞出i人和e人的趣味火花。',
         'modal.ip.philosophy': '只是猫的外形配色取自"芝士"，"芝士"音同"只是"。取名"只是猫"想传递一种chill的生活哲学——它只是一只猫，好好吃饭、睡觉、发呆就好。人也只是人，不必活得太用力。而"海盐"身形小巧，性格清爽，像夏日海风般给人带来松弛感。',
+        'modal.ip.humimi.name': '虎咪咪',
+        'modal.ip.humimi.desc': '虎咪咪是一只正直靠谱的守护小虎。它天生自带一股沉稳的气场，做事有分寸、有担当，最懂得"守口如瓶"的规矩——不该说的话绝不外传，不该看的秘密绝不偷瞄。它对泄密风险有着敏锐的警觉雷达，总能在第一时间发现并化解隐患。虽然外表看起来有点严肃，但内心温暖，是值得信赖的保密小卫士。',
+        'modal.ip.humimi.philosophy': '"虎，山兽之君也。"在保密文化中，老虎的形象常被用来寓意守护与警惕。在通信不发达的古代，虎符成为统治者调兵遣将的重要凭证，也是闪烁着古人智慧之光的保密信物。虎咪咪音同"护秘密"，外形参考虎符虎节的设计，以广东广州西汉南越王墓出土的错金铭文铜虎节为原型，以数据化的点、线形式表现虎符虎节的文字，展现出时代感与科技感。整体形象既传承了千年保密智慧，又融入了数字时代的视觉语言。',
         'toast': '已复制到剪贴板'
       },
       en: {
@@ -1294,10 +1297,13 @@
         'modal.poster.name': 'More Than Alarms',
         'modal.poster.concept': 'Metaphorically grafting the fire protection confidentiality theme with the daily life symbol "smoke alarm" — sensitivity and vigilance are not limited to devices, but lie in confidentiality awareness. Using minimalist visuals to convey serious government themes, combining communication power with authoritative recognition.',
         'modal.poster.award': 'Recommended by the Ministry of Emergency Management and the National Fire and Rescue Administration to participate in the Central Confidentiality Office selection (one of 18 recommended slots, the only selected unit in Guangzhou).',
-        'modal.ip.header': 'IP_01 / Just Sea Salt',
+        'modal.ip.header': 'IP_01 +02/ Just Sea Salt + Humimi',
         'modal.ip.name': 'Just Sea Salt',
         'modal.ip.desc': 'Zhishi Cat has a gentle personality, loves cooking and building blocks. It has a lively friend "Sea Salt" who always looks for it to play. The two animals have complementary personalities, creating interesting sparks between introverts and extroverts in their daily interactions.',
         'modal.ip.philosophy': 'Zhishi Cat\'s color scheme comes from "cheese", which sounds like "zhishi" (just/is). The name "Zhishi Cat" conveys a chill life philosophy — it is just a cat, eating, sleeping, and daydreaming well. Humans are just humans, no need to live too hard. "Sea Salt" is small and refreshing, bringing a relaxed feeling like a summer sea breeze.',
+        'modal.ip.humimi.name': 'Humimi',
+        'modal.ip.humimi.desc': 'Humimi is an upright and reliable guardian tiger cub. He has a calm personality and a strong sense of responsibility, knowing exactly when to "keep his mouth shut" — never leaking what should not be said, never peeking at secrets that should not be seen. Born with an alert radar, he has sharp intuition against confidentiality risks and can always spot and resolve hidden dangers in time. Though he may look a bit serious, he has a warm heart and is a trustworthy little guardian of secrets.',
+        'modal.ip.humimi.philosophy': '"The tiger is the king of beasts in the mountains." In confidentiality culture, the tiger symbolizes guardianship and vigilance. In ancient times when communication was underdeveloped, the tiger tally (hufu) was an important credential for rulers to dispatch troops, a brilliant testament to ancient wisdom and a confidential token. "Humimi" sounds like "protect secrets" in Chinese. Its design references the tiger tally, based on the gold-inlaid bronze tiger tally unearthed from the Nanyue King Tomb of the Western Han Dynasty in Guangzhou, Guangdong. The inscriptions are represented through digital dots and lines, showing a sense of the times and technology. The overall image inherits millennia of confidentiality wisdom while integrating the visual language of the digital age.',
         'toast': 'Copied to clipboard'
       }
     };
@@ -1446,6 +1452,7 @@
       } else if (type === 'ip') {
         header.textContent = i18n[currentLang]['modal.ip.header'];
         body.innerHTML = `
+          <!-- 只是海盐 -->
           <div style="display:flex; align-items:center; gap:16px; margin-bottom:16px;">
             <img src="https://img.heliar.top/file/1781159286089_头像.jpg" style="width:80px; height:80px; border-radius:50%; object-fit:cover;">
             <h3 style="margin:0;">${i18n[currentLang]['modal.ip.name']}</h3>
@@ -1461,6 +1468,20 @@
             <img src="https://img.heliar.top/file/1781158068747_emoji6.jpeg" alt="">
             <img src="https://img.heliar.top/file/1781158063861_emoji7.jpeg" alt="">
             <img src="https://img.heliar.top/file/1781158066888_emoji8.jpeg" alt="">
+          </div>
+          
+          <hr style="border:none; border-top:1px solid rgba(96,130,192,0.15); margin:32px 0;">
+          
+          <!-- 虎咪咪 -->
+          <div style="display:flex; align-items:center; gap:16px; margin-bottom:16px;">
+            <img src="https://img.heliar.top/file/1781682151090_a8fdc48d616861e3a22a60dfe403090.png" style="width:80px; height:80px; border-radius:50%; object-fit:cover; background:var(--soft-pink);">
+            <h3 style="margin:0;">${i18n[currentLang]['modal.ip.humimi.name']}</h3>
+          </div>
+          <p>${i18n[currentLang]['modal.ip.humimi.desc']}</p>
+          <p>${i18n[currentLang]['modal.ip.humimi.philosophy']}</p>
+          <div style="display:grid; grid-template-columns: 1fr 1fr; gap:12px; margin-top:16px;">
+            <img src="https://img.heliar.top/file/1781678219797_三视图（JPEG）.jpg" style="border-radius:8px; width:100%;" alt="三视图">
+            <img src="https://img.heliar.top/file/1781679256151_封面（JPEG）.jpg" style="border-radius:8px; width:100%;" alt="封面图">
           </div>
         `;
       }
